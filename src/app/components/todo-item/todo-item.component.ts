@@ -10,6 +10,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 export class TodoItemComponent implements OnInit {
 	@Input() todo: Todo;
 	@Output() deleteTodo: EventEmitter<Todo> = new EventEmitter();
+	@Output() valueChange = new EventEmitter();
 
 	constructor(private todoService: TodoService) {}
 

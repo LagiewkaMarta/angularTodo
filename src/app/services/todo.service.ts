@@ -16,10 +16,21 @@ export class TodoService {
 	todosLimit = '?_limit=5';
 	constructor(private http: HttpClient) {}
 
+	//get todos
 	getTodos(): Observable<Todo[]> {
 		return this.http.get<Todo[]>(`${this.todosUrl}${this.todosLimit}`);
 	}
-
+	// delete todo
+	deleteTodo(todo: Todo): Observable<Todo> {
+		// remove from UI
+		const url = `${this.todosUrl}/${todo.id}`;
+		// remove from server
+		return this.http.delete<Todo>(url, httpOptions);
+	}
+	//add todo
+	addTodo(todo: Todo): Observable<Todo> {
+		return this.http.post<Todo>(this.todosUrl, todo, httpOptions);
+	}
 	//toggle todos - PUT request to update on the server
 	toggleCompleted(todo: Todo): Observable<any> {
 		const url = `${this.todosUrl}/${todo.id}`;
